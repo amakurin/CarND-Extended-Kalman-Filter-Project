@@ -2,23 +2,14 @@
 #define TOOLS_H_
 #include <vector>
 #include "Eigen/Dense"
+#include <math.h>
 
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
 using namespace std;
 
-class Tools {
-public:
-  /**
-  * Constructor.
-  */
-  Tools();
-
-  /**
-  * Destructor.
-  */
-  virtual ~Tools();
-
+namespace Tools
+{
   /**
   * A helper method to calculate RMSE.
   */
@@ -29,6 +20,22 @@ public:
   */
   MatrixXd CalculateJacobian(const VectorXd& x_state);
 
-};
+  /**
+  * A helper method to map state vector x to radar measurment space.
+  */
+  VectorXd MapStateToRadar(const VectorXd& x_state);
+
+  /**
+  * A helper method to map radar measurment z to state vector space.
+  */
+  VectorXd MapRadarToState(const VectorXd& z);
+
+  /**
+  * A helper method to just return identity of right dims.
+  */
+  MatrixXd I();
+
+  float NormAngle (float angleRad); 
+}
 
 #endif /* TOOLS_H_ */
